@@ -7,9 +7,10 @@ I'm not officially enrolled on this course, but I use it on my self-taught journ
 If you are also taking this course and want to study more efficiently, by using retrieval practice (know more [here](https://www.brainscape.com/academy/multiple-choice-active-passive-studying/)👈), I created this [deck](https://www.brainscape.com/p/362NO-LH-DF5CZ) in Brainscape for quizzing myself. Feel free to use it and suggest improvements.
 
 Start Date: 15/12/2024
+
 End Date:
 
-🎯Progress Tracker
+# 🎯Progress Tracker
 - [✅] Lecture 1
 - [✅] Lecture 2
 - [✅] Lecture 3
