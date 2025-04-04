@@ -98,11 +98,19 @@ def get_available_letters(letters_guessed):
       letters have not yet been guessed. The letters should be returned in
       alphabetical order
     """
-    # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
-
-
-
+    import string
+    
+    all_available_letters =  []
+    for el in string.ascii_lowercase:
+        all_available_letters.append(el) #string will all lowercase letters
+    #Idea is to check if letter in letters_guess is found in 
+    #all_available_letters list. If it is, then remove it.
+    for ch in letters_guessed:
+        if ch in  all_available_letters:
+            all_available_letters.remove(ch)
+    return "".join(all_available_letters) #join items back into a str
+        
+    
 def hangman(secret_word, with_help):
     """
     secret_word: string, the secret word to guess.
