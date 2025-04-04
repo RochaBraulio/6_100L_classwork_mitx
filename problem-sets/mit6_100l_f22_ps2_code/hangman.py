@@ -77,8 +77,16 @@ def get_word_progress(secret_word, letters_guessed):
     returns: string, comprised of letters and asterisks (*) that represents
         which letters in secret_word have not been guessed so far
     """
-    # FILL IN YOUR CODE HERE AND DELETE "pass"
-    pass
+    progress = []
+    for char in secret_word:
+        progress.append(char) #converts secret_word in a list
+
+    #Idea is to go over each item from progress and check if it is
+    #among letters_guessed. If not, we replace it by an asterisk
+    for i in range(len(progress)):
+        if progress[i] not in letters_guessed:
+            progress[i] = "*"
+    return "".join(progress) #join items back into a string for return
 
 
 def get_available_letters(letters_guessed):
