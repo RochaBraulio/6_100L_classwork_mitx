@@ -22,7 +22,7 @@ End Date:
 - [✅] Lecture 9
 - [✅] Lecture 10
 - [✅] Lecture 11
-- [ ] Lecture 12
+- [✅] Lecture 12
 - [ ] Lecture 13
 - [ ] Lecture 14
 - [ ] Lecture 15
