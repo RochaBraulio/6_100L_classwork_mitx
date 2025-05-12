@@ -290,13 +290,12 @@ def get_tfidf(tf_file_path, idf_file_paths):
     idf = get_idf(idf_file_paths)
     tf_idf = {}
     tf_idf_sorted = []
-    dup_low_v_idx = []
-    dup_low_k = []
     
     for w1 in tf.keys():
         tf_idf[w1] = tf[w1]*idf[w1]
-    
     while len(tf_idf)!= 0:
+        dup_low_v_idx = []
+        dup_low_k = []
         tf_idf_k = list(tf_idf.keys())
         tf_idf_v = list(tf_idf.values())
         low = min(tf_idf_v)
@@ -377,11 +376,14 @@ if __name__ == "__main__":
     # print(most_frequent)      # should print ["hello", "world"]
 
     ## Tests Problem 5: Find TF-IDF
-    tf_text_file = 'tests/student_tests/hello_world.txt'
-    idf_text_files = ['tests/student_tests/hello_world.txt', 'tests/student_tests/hello_friends.txt']
-    tf = get_tf(tf_text_file)
-    idf = get_idf(idf_text_files)
-    tf_idf = get_tfidf(tf_text_file, idf_text_files)
-    print(tf)     # should print {'hello': 0.6666666666666666, 'world': 0.3333333333333333}
-    print(idf)    # should print {'hello': 0.0, 'world': 0.3010299956639812, 'friends': 0.3010299956639812}
-    print(tf_idf) # should print [('hello', 0.0), ('world', 0.10034333188799373)]
+    # tf_text_file = 'tests/student_tests/hello_world.txt'
+    # idf_text_files = ['tests/student_tests/hello_world.txt', 'tests/student_tests/hello_friends.txt'] # ORIGINAL- KEEP
+    # tf = get_tf(tf_text_file)
+    # idf = get_idf(idf_text_files)
+    # tf_idf = get_tfidf(tf_text_file, idf_text_files)
+    # print(tf)     # should print {'hello': 0.6666666666666666, 'world': 0.3333333333333333}
+    # print(idf)    # should print {'hello': 0.0, 'world': 0.3010299956639812, 'friends': 0.3010299956639812}
+    # print(tf_idf) # should print [('hello', 0.0), ('world', 0.10034333188799373)]
+    
+    
+       
