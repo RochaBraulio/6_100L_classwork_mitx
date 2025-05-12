@@ -165,7 +165,42 @@ def get_most_frequent_words(freq_dict1, freq_dict2):
     If multiple words are tied (i.e. share the same highest frequency),
     return an alphabetically ordered list of all these words.
     """
-    pass
+    from copy import deepcopy
+    
+    mst_frq_wrd = []
+    dt = deepcopy(freq_dict1)
+    for k,v in freq_dict2.items():
+        if k in dt:
+            dt[k] += v
+        else:
+            dt[k] = v
+    
+    while len(dt) != 0:
+        dup_idx = []
+        dup_keys = []
+        kl = list(dt.keys())
+        vl = list(dt.values())
+        high = max(vl)
+        high_count = vl.count(high)
+        if high_count > 1: # in case there are words tied in terms of frequency
+            for i in range(len(vl)): #using .index() on list with duplicates always returns first match, so must use this approach instead
+            #Gets the index of all values in vl that are equal to high    
+                if vl[i] == high:
+                    dup_idx.append(i)
+            #Uses these indices to retrieve all keys with frequency == high
+            for i2 in dup_idx:
+                k1 = kl[i2]
+                dup_keys.append(k1)
+            dup_keys.sort()
+            mst_frq_wrd.extend(dup_keys) #extends mst_frq_wrd with sorted keys
+            for k2 in dup_keys: #removes keys from dt
+                dt.pop(k2)
+        else: #high value appear just once in vl
+            idx = vl.index(high) #gets the index of high in vl
+            kmax = kl[idx] #retrieves the correspoding key in kl
+            mst_frq_wrd.append(kl[idx]) #adds this key to the output list
+            dt.pop[kmax]
+    return mst_frq_wrd
 
 
 ### Problem 5: Finding TF-IDF ###
@@ -259,9 +294,9 @@ if __name__ == "__main__":
     # print(word_similarity4)       # should print 0.4
 
     ## Tests Problem 4: Most Frequent Word(s)
-    # freq_dict1, freq_dict2 = {"hello": 5, "world": 1}, {"hello": 1, "world": 5}
-    # most_frequent = get_most_frequent_words(freq_dict1, freq_dict2)
-    # print(most_frequent)      # should print ["hello", "world"]
+    freq_dict1, freq_dict2 = {"hello": 5, "world": 1}, {"hello": 1, "world": 5}
+    most_frequent = get_most_frequent_words(freq_dict1, freq_dict2)
+    print(most_frequent)      # should print ["hello", "world"]
 
     ## Tests Problem 5: Find TF-IDF
     # tf_text_file = 'tests/student_tests/hello_world.txt'
