@@ -38,9 +38,18 @@ def text_to_list(input_text):
     Returns:
         list representation of input_text, where each word is a different element in the list
     """
+    # str_list = []
+    # str_list = input_text.split(sep=" ")
+    # return str_list
+
     str_list = []
-    str_list = input_text.split(sep=" ")
-    return str_list
+    str_list = input_text.splitlines() #gets rid of newlines
+    str2 = " ".join(str_list)
+    str_list2 = str2.split(sep=" ")
+    while "" in str_list2: #gets rid of any extra whitespaces
+        str_list2.remove("")
+    return str_list2
+ 
 
 
 ### Problem 1: Get Frequency ###
@@ -199,7 +208,7 @@ def get_most_frequent_words(freq_dict1, freq_dict2):
             idx = vl.index(high) #gets the index of high in vl
             kmax = kl[idx] #retrieves the correspoding key in kl
             mst_frq_wrd.append(kl[idx]) #adds this key to the output list
-            dt.pop[kmax]
+            dt.pop(kmax)
     return mst_frq_wrd
 
 
