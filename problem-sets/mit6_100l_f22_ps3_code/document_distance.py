@@ -103,7 +103,45 @@ def calculate_similarity_score(freq_dict1, freq_dict2):
          all frequencies in both dict1 and dict2.
         Return 1-(DIFF/ALL) rounded to 2 decimal places
     """
-    pass
+    delta = []
+    sigma = []
+    un_words = [] #intersection of words between freq_dict1 and freq_dict2
+    
+    #Calculates the intersection of freq_dict1 and freq_dict2, i.e.
+    #the list of words that appear on both dicts
+    un_words = list(freq_dict1.keys())
+    for k2 in freq_dict2.keys():
+        if k2 not in un_words:
+            un_words.append(k2)
+    
+    #Calculates delta for each element in un_words list
+    for u1 in un_words:
+        try:
+            d1 = freq_dict1[u1]
+        except:
+            d1 = 0 #u1 is not in freq_dict1
+        try:
+            d2 = freq_dict2[u1]
+        except:
+            d2 = 0 #u1 is not in freq_dict2
+        delta.append(abs(d1 - d2))
+    
+    #Calculates sigma for each element in un_words list
+    for u2 in un_words:
+        try:
+            s1 = freq_dict1[u2]
+        except:
+            s1 = 0 #u1 is not in freq_dict1
+        try:
+            s2 = freq_dict2[u2]
+        except:
+            s2 = 0 #u1 is not in freq_dict2
+        sigma.append(s1 + s2)
+    
+    #Calculates the similarity
+    simi = round(1 - (sum(delta)/sum(sigma)),2)
+    return simi
+    
 
 
 ### Problem 4: Most Frequent Word(s) ###
@@ -197,10 +235,10 @@ if __name__ == "__main__":
     # print(friend_word_freq)   # should print {'hello': 1, 'friends': 1}
 
     ## Tests Problem 2: Get Letter Frequencies
-    freq1 = get_letter_frequencies('hello')
-    freq2 = get_letter_frequencies('that')
-    print(freq1)      #  should print {'h': 1, 'e': 1, 'l': 2, 'o': 1}
-    print(freq2)      #  should print {'t': 2, 'h': 1, 'a': 1}
+    # freq1 = get_letter_frequencies('hello')
+    # freq2 = get_letter_frequencies('that')
+    # print(freq1)      #  should print {'h': 1, 'e': 1, 'l': 2, 'o': 1}
+    # print(freq2)      #  should print {'t': 2, 'h': 1, 'a': 1}
 
     ## Tests Problem 3: Similarity
     # test_directory = "tests/student_tests/"
