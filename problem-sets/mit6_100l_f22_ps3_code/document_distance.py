@@ -74,7 +74,8 @@ def get_letter_frequencies(word):
         is a letter in word and the corresponding int
         is the frequency of the letter in word
     """
-    pass
+    ch_freq = get_frequencies(word)
+    return ch_freq
 
 
 ### Problem 3: Similarity ###
@@ -196,10 +197,10 @@ if __name__ == "__main__":
     # print(friend_word_freq)   # should print {'hello': 1, 'friends': 1}
 
     ## Tests Problem 2: Get Letter Frequencies
-    # freq1 = get_letter_frequencies('hello')
-    # freq2 = get_letter_frequencies('that')
-    # print(freq1)      #  should print {'h': 1, 'e': 1, 'l': 2, 'o': 1}
-    # print(freq2)      #  should print {'t': 2, 'h': 1, 'a': 1}
+    freq1 = get_letter_frequencies('hello')
+    freq2 = get_letter_frequencies('that')
+    print(freq1)      #  should print {'h': 1, 'e': 1, 'l': 2, 'o': 1}
+    print(freq2)      #  should print {'t': 2, 'h': 1, 'a': 1}
 
     ## Tests Problem 3: Similarity
     # test_directory = "tests/student_tests/"
