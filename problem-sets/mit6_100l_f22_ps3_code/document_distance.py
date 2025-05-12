@@ -55,7 +55,13 @@ def get_frequencies(input_iterable):
     Note: 
         You can assume that the only kinds of white space in the text documents we provide will be new lines or space(s) between words (i.e. there are no tabs)
     """
-    pass
+    freq = {}
+    for el in input_iterable:
+        if el not in freq.keys():
+            freq[el] = 1
+        else:
+            freq[el] += 1
+    return freq
 
 
 ### Problem 2: Letter Frequencies ###
@@ -174,11 +180,11 @@ if __name__ == "__main__":
     ###############################################################
 
     ## Tests Problem 0: Prep Data
-    test_directory = "tests/student_tests/"
-    hello_world, hello_friend = load_file(test_directory + 'hello_world.txt'), load_file(test_directory + 'hello_friends.txt')
-    world, friend = text_to_list(hello_world), text_to_list(hello_friend)
-    print(world)      # should print ['hello', 'world', 'hello']
-    print(friend)     # should print ['hello', 'friends']
+    # test_directory = "tests/student_tests/"
+    # hello_world, hello_friend = load_file(test_directory + 'hello_world.txt'), load_file(test_directory + 'hello_friends.txt')
+    # world, friend = text_to_list(hello_world), text_to_list(hello_friend)
+    # print(world)      # should print ['hello', 'world', 'hello']
+    # print(friend)     # should print ['hello', 'friends']
 
     ## Tests Problem 1: Get Frequencies
     # test_directory = "tests/student_tests/"
