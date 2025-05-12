@@ -277,7 +277,43 @@ def get_tfidf(tf_file_path, idf_file_paths):
 
         * TF-IDF(i) = TF(i) * IDF(i)
         """
-    pass
+    tf = get_tf(tf_file_path)
+    idf = get_idf(idf_file_paths)
+    tf_idf = {}
+    tf_idf_sorted = []
+    dup_low_v_idx = []
+    dup_low_k = []
+    
+    for w1 in tf.keys():
+        tf_idf[w1] = tf[w1]*idf[w1]
+    
+    while len(tf_idf)!= 0:
+        tf_idf_k = list(tf_idf.keys())
+        tf_idf_v = list(tf_idf.values())
+        low = min(tf_idf_v)
+        low_count = tf_idf_v.count(low)
+        if low_count > 1: # multiple words with the same value of TF-IDF
+            for i1 in range(len(tf_idf_v)):
+                #Gets the index of all values in tf_idf_v == low
+                if tf_idf_v[i1] == low:
+                    dup_low_v_idx.append(i1)
+            #Uses these indices to retrieve all keys with TD-IDF == low
+            for i2 in dup_low_v_idx:
+                kmin = tf_idf_k[i2]
+                dup_low_k.append(kmin)
+            dup_low_k.sort()
+            # Add words to output
+            for k1 in dup_low_k:
+                tf_idf_sorted.append((k1,low))
+            # Remove keys from dict
+            for k2 in dup_low_k:
+                tf_idf.pop(k2)
+        else:
+            i3 = tf_idf_v.index(low) #gets the index of low in tf_idf_v
+            kmin = tf_idf_k[i3] #retrieves the correspoding key in tf_idf_k
+            tf_idf_sorted.append((kmin,low))
+            tf_idf.pop(kmin)
+    return tf_idf_sorted
 
 
 if __name__ == "__main__":
@@ -336,7 +372,7 @@ if __name__ == "__main__":
     idf_text_files = ['tests/student_tests/hello_world.txt', 'tests/student_tests/hello_friends.txt']
     tf = get_tf(tf_text_file)
     idf = get_idf(idf_text_files)
-    # tf_idf = get_tfidf(tf_text_file, idf_text_files)
-    # print(tf)     # should print {'hello': 0.6666666666666666, 'world': 0.3333333333333333}
+    tf_idf = get_tfidf(tf_text_file, idf_text_files)
+    print(tf)     # should print {'hello': 0.6666666666666666, 'world': 0.3333333333333333}
     print(idf)    # should print {'hello': 0.0, 'world': 0.3010299956639812, 'friends': 0.3010299956639812}
-    # print(tf_idf) # should print [('hello', 0.0), ('world', 0.10034333188799373)]
+    print(tf_idf) # should print [('hello', 0.0), ('world', 0.10034333188799373)]
