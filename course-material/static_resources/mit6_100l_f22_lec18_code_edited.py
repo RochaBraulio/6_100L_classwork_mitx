@@ -137,19 +137,22 @@ class SimpleFraction(object):
         self.denom = denom
     def get_inverse(self):
         """ Returns a float representing 1/self """
-        # your code here
-        
+        return self.denom/self.num
     def invert(self):
         """ Sets self's numerator to its denominator and vice versa.
             Returns None. """
-        # your code here
+        frac = (self.num, self.denom)
+        # better way without creating variable that will be used once only 
+        # (self.num, self.denom) = (self.denom, self.num)
+        self.num = frac[1]
+        self.denom = frac[0]
         
         
-# f1 = SimpleFraction(3,4)
-# print(f1.num, f1.denom)   # prints 3 4 
-# print(f1.get_inverse())   # prints 1.33333333 (note this one returns value)
-# f1.invert()               # acts on data attributes internally, no return
-# print(f1.num, f1.denom)   # prints 4 3 
+f1 = SimpleFraction(3,4)
+print(f1.num, f1.denom)   # prints 3 4 
+print(f1.get_inverse())   # prints 1.33333333 (note this one returns value)
+f1.invert()               # acts on data attributes internally, no return
+print(f1.num, f1.denom)   # prints 4 3 
 
 
 #########################################
@@ -210,9 +213,9 @@ class Fraction(object):
         return Fraction(self.denom, self.num)
 
 # # Using shorthand operations on fractions        
-# a = Fraction(1,4)
-# b = Fraction(3,4)
-# print(a)
+a = Fraction(1,4)
+b = Fraction(3,4)
+print(a)
 # c = a * b # c is a Fraction object
 # print(c)
 
@@ -257,13 +260,16 @@ class Fraction(object):
     def __str__(self):
         """ Returns a string representation of self """
         # modify this
-        return str(self.num) + "/" + str(self.denom)
+        if self.denom == 1:
+            return str(self.num)
+        else:
+            return str(self.num) + "/" + str(self.denom)
 
  
 a = Fraction(1,4)
 b = Fraction(3,1)
-# print(a)     # prints 1/4
-# print(b)     # prints 3
+print(a)     # prints 1/4
+print(b)     # prints 3
 
 #######################################################
 
