@@ -27,8 +27,8 @@ End Date:
 - [✅] Lecture 14
 - [✅] Lecture 15
 - [✅] Lecture 16
-- [ ] Lecture 17
-- [ ] Lecture 18
+- [✅] Lecture 17
+- [✅] Lecture 18
 - [ ] Lecture 19
 - [ ] Lecture 20
 - [ ] Lecture 21
