@@ -19,8 +19,37 @@ def find_tree_height(tree):
     Output:
         The integer depth of the tree
     '''
-    # TODO: Remove pass and write your code here
-    pass
+    hr = 0
+    hl = 0
+    
+    if tree.get_left_child() is None:
+        hl += 0
+    else:
+        new_node_l = tree.get_left_child()
+        hl += 1 + find_tree_height(new_node_l.get_left_child()) + find_tree_height(new_node_l.get_right_child())
+    
+    if tree.get_right_child() is None:
+        hr += 0
+    else:
+        new_node_r = tree.get_right_child()
+        hr += 1 + find_tree_height(new_node_r.get_left_child()) + find_tree_height(new_node_r.get_right_child())
+    
+    find_tree_height(tree.get_left_child())
+    
+    find_tree_height(tree.get_right_child())
+    
+    
+    if tree.get_left_child() is None and tree.get_right_child() is None:
+        height += 0
+    else:
+        
+    if tree.get_left_child() is None
+    find_tree_height(tree.get_left_child())
+    find_tree_height(tree.get_right_child())
+    
+    
+    return height
+    
 
 def is_heap(tree, compare_func):
     '''
