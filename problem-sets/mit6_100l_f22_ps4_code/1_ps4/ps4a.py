@@ -11,6 +11,7 @@ tree1 = Node(8, Node(2, Node(1), Node(6)), Node(10))
 tree2 = Node(7, Node(2, Node(1), Node(5, Node(3), Node(6))), Node(9, Node(8), Node(10)))
 tree3 = Node(5, Node(3, Node(2), Node(4)), Node(14, Node(12), Node(21, Node(20), Node(26))))
 
+
 def find_tree_height(tree):
     '''
     Find the height of the given tree
@@ -19,37 +20,18 @@ def find_tree_height(tree):
     Output:
         The integer depth of the tree
     '''
-    hr = 0
-    hl = 0
-    
-    if tree.get_left_child() is None:
-        hl += 0
-    else:
-        new_node_l = tree.get_left_child()
-        hl += 1 + find_tree_height(new_node_l.get_left_child()) + find_tree_height(new_node_l.get_right_child())
-    
-    if tree.get_right_child() is None:
-        hr += 0
-    else:
-        new_node_r = tree.get_right_child()
-        hr += 1 + find_tree_height(new_node_r.get_left_child()) + find_tree_height(new_node_r.get_right_child())
-    
-    find_tree_height(tree.get_left_child())
-    
-    find_tree_height(tree.get_right_child())
-    
-    
+    height = 0
     if tree.get_left_child() is None and tree.get_right_child() is None:
-        height += 0
+        height = 0 # height of leaf node is zero
+    elif tree.get_left_child() is None:
+        height = find_tree_height(tree.get_right_child()) + 1
+    elif tree.get_right_child() is None:
+        height = find_tree_height(tree.get_left_child()) + 1
     else:
-        
-    if tree.get_left_child() is None
-    find_tree_height(tree.get_left_child())
-    find_tree_height(tree.get_right_child())
-    
-    
-    return height
-    
+        height = max(
+            find_tree_height(tree.get_left_child()),
+            find_tree_height(tree.get_right_child())) + 1 
+    return height   
 
 def is_heap(tree, compare_func):
     '''
