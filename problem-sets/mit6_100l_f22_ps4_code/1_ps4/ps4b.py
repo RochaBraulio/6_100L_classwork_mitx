@@ -1,6 +1,6 @@
 # Problem Set 4B
-# Name:
-# Collaborators:
+# Name: Braulio Rocha
+# Collaborators: None
 
 import random
 
@@ -15,7 +15,7 @@ class Message(object):
         a Message object has one attribute:
             the message text
         '''
-        raise NotImplementedError  # delete this line and replace with your code here
+        self._msg = input_text
 
     def __repr__(self):
         '''
