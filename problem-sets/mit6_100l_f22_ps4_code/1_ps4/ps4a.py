@@ -1,6 +1,6 @@
 # Problem Set 4A
-# Name:
-# Collaborators:
+# Name: Braulio Rocha
+# Collaborators: None
 
 from tree import Node # Imports the Node object used to construct trees
 
@@ -11,6 +11,8 @@ tree1 = Node(8, Node(2, Node(1), Node(6)), Node(10))
 tree2 = Node(7, Node(2, Node(1), Node(5, Node(3), Node(6))), Node(9, Node(8), Node(10)))
 tree3 = Node(5, Node(3, Node(2), Node(4)), Node(14, Node(12), Node(21, Node(20), Node(26))))
 
+tr1 = Node(5,Node(15,None,Node(16,Node(30),Node(17))),Node(6,Node(20,None,Node(45)),Node(11))) # True
+tr2 = Node(2,Node(3,Node(4),Node(5,Node(6))),Node(7,None,Node(8,Node(9),Node(1)))) # False
 
 def find_tree_height(tree):
     '''
@@ -44,10 +46,44 @@ def is_heap(tree, compare_func):
     Output:
         True if the entire tree satisfies the compare_func function; False otherwise
     '''
-    # TODO: Remove pass and write your code here
-    pass
-
-
+    if tree.get_left_child() is None and tree.get_right_child() is None:
+        return True # base case for leaf node
+    elif tree.get_left_child() is None:
+        heap_check_right = (
+            compare_func(
+                tree.get_right_child().get_value(),
+                tree.get_value()
+                )
+            and is_heap(tree.get_right_child(),compare_func)
+            )
+        return heap_check_right
+    elif tree.get_right_child() is None:
+        heap_check_left = (
+            compare_func(
+                tree.get_left_child().get_value(),
+                tree.get_value()
+                )
+            and is_heap(tree.get_left_child(),compare_func)
+            )
+        return heap_check_left
+    else:
+        # checks if left subtree is a heap
+        heap_check_left = (
+            compare_func(
+                tree.get_left_child().get_value(),
+                tree.get_value()
+                )
+            and is_heap(tree.get_left_child(),compare_func)
+            )
+        # checks if right subtree is a heap
+        heap_check_right = (
+            compare_func(
+                tree.get_right_child().get_value(),
+                tree.get_value()
+                )
+            and is_heap(tree.get_right_child(),compare_func)
+            )
+        return (heap_check_left and heap_check_right)
 
 if __name__ == '__main__':
     # You can use this part for your own testing and debugging purposes.
