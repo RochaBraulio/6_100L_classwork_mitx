@@ -90,9 +90,11 @@ class Message(object):
 
         Returns: (string) The ciphertext produced using the one time pad
         '''
-        raise NotImplementedError  # delete this line and replace with your code here
-
-
+        
+        chiper_list = [self.shift_char(self._msg[i],pad[i]) for i in range(len(self._msg))]
+        chiper_txt = "".join(chiper_list)
+        return chiper_txt
+            
 class PlaintextMessage(Message):
     def __init__(self, input_text, pad=None):
         '''
