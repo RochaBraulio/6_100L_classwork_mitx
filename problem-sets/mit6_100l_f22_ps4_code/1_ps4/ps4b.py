@@ -44,8 +44,41 @@ class Message(object):
 
         Returns: (string) the shifted character with ASCII value in the range [32, 126]
         '''
-        raise NotImplementedError  # delete this line and replace with your code here
-
+        ascii_char = ord(char)
+        if shift%95 == 0:
+            # Either there is no shift, or it's a multiple of 95, the latter 
+            # means the shift will wrap around the range in any direction
+            # and finish at the same character where it started
+            return chr(ascii_char)
+        elif shift > 0:
+            # Number of characters from current position to the start of range (32)
+            ascii_pos_to_start = (126 - ascii_char) + 1
+            if shift%95 > ascii_pos_to_start:
+                # Subtracts this amount from the desired shift
+                remaining_shift = shift%95 - ascii_pos_to_start
+                # Shifts ASCII by the desired amount, starting from 32
+                shifted_ascii_char = 32 + remaining_shift
+                return chr(shifted_ascii_char)
+            elif shift%95 == ascii_pos_to_start:
+                return chr(32)
+            else:
+                shifted_ascii_char = ascii_char + shift%95
+                return chr(shifted_ascii_char)
+        elif shift < 0:
+            # Number of characters from current position to end of range (126)
+            ascii_pos_to_end = (ascii_char - 32) + 1
+            if abs(shift)%95 > ascii_pos_to_end:
+                # Subtracts this amount from the desired shift
+                remaining_shift = abs(shift)%95 - ascii_pos_to_end
+                # Shifts ASCII by the desired amount, backwards from 126
+                shifted_ascii_char = 126 - remaining_shift
+                return chr(shifted_ascii_char)
+            elif abs(shift)%95 == ascii_pos_to_end:
+                return chr(126)
+            else:
+                shifted_ascii_char = ascii_char - abs(shift)%95
+                return chr(shifted_ascii_char)
+            
     def apply_pad(self, pad):
         '''
         Used to calculate the ciphertext produced by applying a one time pad to the message text.
