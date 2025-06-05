@@ -1,6 +1,6 @@
 # Problem Set 4C
-# Name:
-# Collaborators:
+# Name: Braulio Rocha
+# Collaborators: None
 
 import json
 import ps4b # Importing your work from Part B
@@ -80,8 +80,39 @@ def decrypt_message_try_pads(ciphertext, pads):
 
     Returns: (PlaintextMessage) A message with the decrypted ciphertext and the best pad
     '''
-    raise NotImplementedError  # delete this line and replace with your code here
-
+    
+    
+    from copy import deepcopy
+    
+    eng_words = load_words(WORDLIST_FILENAME)
+    pads_copy = deepcopy(pads)
+    valid_words_from_pads = []
+    # Gets the number of valid words in decrypted ciphertext for each pad
+    # and adds this to valid_words_from_pads
+    for i in range(len(pads_copy)):
+        valid_words_count = 0
+        decrypted_ciphertext = ciphertext.decrypt_message(pads_copy[i]).get_text()
+        decrypted_list = decrypted_ciphertext.split(" ")
+        for word in decrypted_list:
+            if is_word(eng_words, word):
+                valid_words_count += 1
+        valid_words_from_pads.append(valid_words_count)
+    # Retrieves index k from pad with the highest count of valid words
+    # according to function specification
+    if valid_words_from_pads.count(max(valid_words_from_pads)) > 1:
+        # Creates list with indices of pads equal to the max
+        high = [
+            j
+            for j in range(len(valid_words_from_pads))
+            if valid_words_from_pads[j] == max(valid_words_from_pads)
+            ]
+        k = max(high) # retrieves the last pad equal to the max
+    elif valid_words_from_pads.count(max(valid_words_from_pads)) == 1:
+        k = valid_words_from_pads.index(max(valid_words_from_pads))
+    # Retrieves best pad and its correspoding decrypted ciphertext
+    best_pad = pads_copy[k]
+    best_decrypted_ciphertext =ciphertext.decrypt_message(best_pad).get_text()
+    return ps4b.PlaintextMessage(best_decrypted_ciphertext, best_pad)
 
 def decode_story():
     '''
