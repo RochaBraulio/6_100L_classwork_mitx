@@ -10,14 +10,23 @@ class Workout(object):
     """
     Object to record a workout
     """
-    def __init__(self, start, end, calories):
-        self._start_time = start
-        self._end_time = end
+    calories_hour = 200 #estimate of calories burned per unit of time
+    
+    
+    def __init__(self, start, end, calories=None):
+        self._start_time = parser.parse(start)
+        self._end_time = parser.parse(end)
         self._calories = calories
         self._icon = '🥵'
         self._kind = 'Workout'
     def get_calories(self):
-        return self._calories
+        if self._calories == None:
+            return (Workout.calories_hour*
+                    (self._end_time - self._start_time).
+                    total_seconds()/3600
+                    ) 
+        else:
+            return self.calories
     def get_start_time(self):
         return self._start_time
     def get_end_time(self):
