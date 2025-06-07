@@ -37,6 +37,21 @@ class Workout(object):
         self._start_time = start
     def set_end_time(self, end):
         self._end_time = end
+    def __str__(self):
+        """Return a text-based graphical depiction of the workout"""
+        width = 16
+        retstr =  f"|{'–'*width}|\n"
+        retstr += f"|{' ' *width}|\n"
+        retstr += f"| {self._icon}{' '*(width-3)}|\n"  #assume width of icon is 2 chars - len('🏃🏽‍♀️');  doesn't do what you'd epxect
+        retstr += f"| {self._kind}{' '*(width-len(self._kind)-1)}|\n"
+        retstr += f"|{' ' *width}|\n"
+        duration_str = str(self.get_duration())
+        retstr += f"| {duration_str}{' '*(width-len(duration_str)-1)}|\n"
+        cal_str = f"{round(self.get_calories(),1)}"
+        retstr += f"| {cal_str} Calories {' '*(width-len(cal_str)-11)}|\n"
+        retstr += f"|{' ' *width}|\n"
+        retstr +=  f"|{'_'*width}|\n"
+        return retstr
         
         
 class RunWorkout(Workout):
@@ -50,8 +65,8 @@ class RunWorkout(Workout):
         self._kind = 'Running'
     def get_elev(self):
         return self._elevation
-    def set_elev(self, e):
-        self._elevation = e
+    def set_elev(self, elev):
+        self._elevation = elev
         
         
 # ============================================================================ 
