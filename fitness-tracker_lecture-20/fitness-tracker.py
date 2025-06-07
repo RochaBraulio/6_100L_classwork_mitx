@@ -52,6 +52,9 @@ class Workout(object):
         retstr += f"|{' ' *width}|\n"
         retstr +=  f"|{'_'*width}|\n"
         return retstr
+    def get_duration(self):
+        """Return the duration of the workout, as a datetime.interval object"""
+        return self._end_time-self._start_time
         
         
 class RunWorkout(Workout):
