@@ -6,6 +6,8 @@ Created on Fri Jun  6 16:48:28 2025
 @author: rocha
 """
 
+from dateutil import parser
+
 class Workout(object):
     """
     Object to record a workout
@@ -26,7 +28,7 @@ class Workout(object):
                     total_seconds()/3600
                     ) 
         else:
-            return self.calories
+            return self._calories
     def get_start_time(self):
         return self._start_time
     def get_end_time(self):
@@ -37,3 +39,20 @@ class Workout(object):
         self._start_time = start
     def set_end_time(self, end):
         self._end_time = end
+        
+# ============================================================================ 
+# For testing
+# ============================================================================ 
+
+start = '2025/09/24 15:35'
+end = '2025/09/24 16:28'
+
+w1 = Workout(start, end)
+w2 = Workout(start, end, 137)
+
+w3 = Workout('2021/01/1 3:30 PM', '2021/01/1 4:00 PM')
+print(f'Total calories burned during w3 was {w3.get_calories()}\n')
+w4 = Workout('2021/01/1 3:35 PM', '2021/01/1 4:00 PM', 300)
+print(f'Total calories burned during w4 was {w4.get_calories()}\n')
+
+ 
