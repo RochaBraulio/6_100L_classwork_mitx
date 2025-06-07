@@ -13,8 +13,6 @@ class Workout(object):
     Object to record a workout
     """
     calories_hour = 200 #estimate of calories burned per unit of time
-    
-    
     def __init__(self, start, end, calories=None):
         self._start_time = parser.parse(start)
         self._end_time = parser.parse(end)
@@ -39,6 +37,22 @@ class Workout(object):
         self._start_time = start
     def set_end_time(self, end):
         self._end_time = end
+        
+        
+class RunWorkout(Workout):
+    """
+    Object to record a running workout
+    """
+    def __init__(self, start, end, elev=0, calories=None):
+        super().__init__(start, end, calories)
+        self._icon = '🏃'
+        self._elevation = elev
+        self._kind = 'Running'
+    def get_elev(self):
+        return self._elevation
+    def set_elev(self, e):
+        self._elevation = e
+        
         
 # ============================================================================ 
 # For testing
