@@ -70,9 +70,6 @@ def img_to_pix(filename):
                  in form L such as [60,66,72...] for BW image
     """
     with Image.open(filename) as img:
-        #pix = img.load()
-    #a = pix[0,270]
-    #print(a)
         pix = list(img.getdata())
     img.close()
     return pix
@@ -93,8 +90,11 @@ def pix_to_img(pixels_list, size, mode):
     returns:
         img: Image object made from list of pixels
     """
-    pass
-
+    # Create new blank image with the same size as the original one
+    img = Image.new(mode=mode, size=size)
+    # Coloring pixels of blank image with pixel color data from original img
+    img.putdata(data=pixels_list)
+    return img 
 
 def filter(pixels_list, color):
     """
@@ -211,10 +211,11 @@ def main():
     width, height = im.size
     pixels = img_to_pix('image_15.png')
 
-    #non_filtered_pixels = filter(pixels,'none')
-    #im = pix_to_img(non_filtered_pixels, (width, height), 'RGB')
-    # im.show()
-
+    #non_filtered_pixels = filter(pixels,'none') # returns None instead of actual list
+    im1 = pix_to_img(pixels, (width, height), 'RGB')
+    #im = pix_to_img(non_filtered_pixels, (width, height), 'RGB') # Original approach
+    im1.show()
+    
     #red_filtered_pixels = filter(pixels,'red')
     #im2 = pix_to_img(red_filtered_pixels,(width,height), 'RGB')
     # im2.show()
