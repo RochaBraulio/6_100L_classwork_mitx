@@ -1,7 +1,7 @@
 """
 # Problem Set 5
-# Name:
-# Collaborators:
+# Name: Braulio Rocha
+# Collaborators: None
 """
 
 from PIL import Image, ImageFont, ImageDraw
@@ -69,8 +69,13 @@ def img_to_pix(filename):
                  in form (R,G,B) such as [(0,0,0),(255,255,255),(38,29,58)...] for RGB image
                  in form L such as [60,66,72...] for BW image
     """
-    pass
-
+    with Image.open(filename) as img:
+        #pix = img.load()
+    #a = pix[0,270]
+    #print(a)
+        pix = list(img.getdata())
+    img.close()
+    return pix
 
 def pix_to_img(pixels_list, size, mode):
     """
@@ -202,9 +207,9 @@ def main():
 
     # Uncomment the following lines to test part 1
 
-    #im = Image.open('image_15.png')
-    #width, height = im.size
-    #pixels = img_to_pix('image_15.png')
+    im = Image.open('image_15.png')
+    width, height = im.size
+    pixels = img_to_pix('image_15.png')
 
     #non_filtered_pixels = filter(pixels,'none')
     #im = pix_to_img(non_filtered_pixels, (width, height), 'RGB')
