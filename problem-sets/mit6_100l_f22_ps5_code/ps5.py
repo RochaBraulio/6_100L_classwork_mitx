@@ -6,6 +6,7 @@
 
 from PIL import Image, ImageFont, ImageDraw
 import numpy
+import copy
 
 
 def make_matrix(color):
@@ -105,7 +106,13 @@ def filter(pixels_list, color):
     returns: list of pixels in same format as earlier functions,
     transformed by matrix multiplication
     """
-    pass
+    pixels = copy.copy(pixels_list)
+    transf_mat = make_matrix(color)
+    pixels_transformed = []
+    for px in pixels:
+        px = matrix_multiply(transf_mat, px)
+        pixels_transformed.append(tuple([round(el.item()) for el in px]))
+    return pixels_transformed
 
 
 def extract_end_bits(num_end_bits, pixel):
@@ -138,8 +145,11 @@ def extract_end_bits(num_end_bits, pixel):
     Returns:
         The num_end_bits of pixel, as an integer (BW) or tuple of integers (RGB).
     """
-    pass
-
+    if isinstance(pixel,tuple):
+        return tuple([px%(2**num_end_bits) for px in pixel])
+    else:
+        return pixel%(2**num_end_bits)
+    
 
 def reveal_bw_image(filename):
     """
@@ -211,14 +221,13 @@ def main():
     width, height = im.size
     pixels = img_to_pix('image_15.png')
 
-    #non_filtered_pixels = filter(pixels,'none') # returns None instead of actual list
-    im1 = pix_to_img(pixels, (width, height), 'RGB')
-    #im = pix_to_img(non_filtered_pixels, (width, height), 'RGB') # Original approach
-    im1.show()
+    non_filtered_pixels = filter(pixels,'none')
+    im = pix_to_img(non_filtered_pixels, (width, height), 'RGB')
+    im.show()
     
-    #red_filtered_pixels = filter(pixels,'red')
-    #im2 = pix_to_img(red_filtered_pixels,(width,height), 'RGB')
-    # im2.show()
+    red_filtered_pixels = filter(pixels,'red')
+    im2 = pix_to_img(red_filtered_pixels,(width,height), 'RGB')
+    im2.show()
 
     # Uncomment the following lines to test part 2
     #im = reveal_image('hidden1.bmp')
