@@ -255,6 +255,7 @@ def main():
     
     # red_filtered_pixels = filter(pixels,'red')
     # im2 = pix_to_img(red_filtered_pixels,(width,height), 'RGB')
+    # im2.save('image_15_filtered.png')
     # im2.show()
 
     # Uncomment the following lines to test part 2
@@ -269,3 +270,6 @@ def main():
 
 if __name__ == '__main__':
     main()
+    # draw_kerb('hidden1_decoded.bmp', 'rb+55')
+    # draw_kerb('hidden2_decoded.bmp', 'rb+55')
+    # draw_kerb('image_15_filtered.png', 'rb+55')
